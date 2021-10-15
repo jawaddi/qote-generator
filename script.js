@@ -66,7 +66,17 @@ function tweet() {
 }
 // if the user refrech the page we don't want him/her to lose the quote
 function refrech() {
+  // localStorage.setItem("quotes", `${JSON.stringify(_data)}`);
+  // in the first time we don't anything in our localstorage so it will be an error
+  // to getItem so quotes=null
+  // what will do if quote ===null we will call fun to get a quote;
   quotes = JSON.parse(localStorage.getItem("quotes"));
+
+  if (!quotes) {
+    // this will call here just for one time
+    fun();
+    return;
+  }
   author.textContent = quotes.author === null ? "Unknown" : quotes.author;
   quote.textContent = quotes.text;
   console.log(quotes.text.length);
